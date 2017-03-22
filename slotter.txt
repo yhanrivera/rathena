@@ -1,0 +1,145 @@
+//Upgraded Temporal Boots Slotter//
+//Compatible to latest rathena //
+//yhanrivera				   //
+//Please use this, but don't claim that its yours.//
+//Version 1.0 //
+glast_01,223,260,5	script	Mysterious Slotter	942,{
+	
+//Core Script
+	mes "[" + .colors$[1] + .npc_name$ + .colors$[0] + "]";
+	mes "I can slot all the Upgraded " + .colors$[2] + getitemname(.tempid) + .colors$[0] + " for you.";
+	next;
+	set .@item_choice, select ("~Temporal Crystal - 10pcs - 70%:~Contaminated Magic - 50pcs - 50%:~Coagulated Spell - 50pcs - 30%");
+//Showing the list	
+	mes "Here are the list of boots where I can do the process:";
+for (set .@a, 0;  .@a < getarraysize(.temp_boots_id); set .@a, .@a + 1) {
+		mes .colors$[1] + getitemname(.temp_boots_id[.@a]) + .colors$[0];
+		set .@item_menu$, .@item_menu$ + (.@item_menu$ == "" ? "" : ":") + .color$[4] + getitemname(.temp_boots_id[.@a]) + .color$[0] ;
+	
+}
+	next;
+	//Menu of the items you want to create or produce
+	mes "So tell me what item do you want to slot ?";
+	next;
+	//Menu executing.
+	set.@item_item, select(.@item_menu$) - 1;
+	next;
+	mes "[" +  .color$[1] + .npc_name$ + .color$[0] + "]";
+	
+//Executing your choice of action
+switch(.@item_choice) {
+	case 1: //Use Temporal Crystall
+		.@rand = rand(1,1000);
+		mes "So you choose to use " + getitemname(.item_id[0]) + " the chance to success is 70%";
+		next;
+		mes .colors$[1] + "Checking is required: " + .colors$[0] + " Please be patient.";
+		next;
+		if (!checkweight(.temp_boots_id[.@item_item],1)) {
+			mes .colors$[1]+"Ooops, Sorry you are overweight. Dont waste your slotted boots dude!" +.colors$[0];
+			close;
+		}
+		else if (countitem(6607) < 10 ) {
+			mes "Please get more " + .colors$[1] + getitemname(.item_id[0]) + .colors$[0] + " to proceed";
+			close;
+		}
+		else if (countitem(.temp_boots_id[.@item_item]) <= 0) {
+			mes "Sorry, you dont have a " + .colors$[1] + getitemname(.temp_boots_id[.@item_item]) + .colors$[0] + ". SAD";
+			close;
+		}
+		else if ( .@rand <= 700 ) {
+			mes "Success, You are such a lucky guy.";
+			delitem .item_id[0],10;
+			delitem .temp_boots_id[.@item_item],1;
+			getitem  .slot_boots_id[.@item_item],1;
+		}
+		else{
+			mes "Oooops, Im so sorry, we failed";
+			delitem .item_id[0],10;
+			delitem .temp_boots_id[.@item_item],1;
+			getitem .tempid,1;
+			break;
+		}
+	case 2://Contaminated Magic
+		.@rand = rand(1,1000);
+		mes "So you choose to use " + getitemname(.item_id[1]) + " the chance to success is 50%";
+		next;
+		mes .colors$[1] + "Checking is required: " + .colors$[0] + " Please be patient.";
+		next;
+		if (!checkweight(.temp_boots_id[.@item_item],1)) {
+			mes .colors$[1]+"Ooops, Sorry you are overweight. Dont waste your slotted boots dude!" +.colors$[0];
+			close;
+		}
+		else if (countitem(6755) < 50 ) {
+			mes "Please get more " + .colors$[1] + getitemname(.item_id[1]) + .colors$[0] + " to proceed";
+			close;
+		}
+		else if (countitem(.temp_boots_id[.@item_item]) <= 0) {
+			mes "Sorry, you dont have a " + .colors$[1] + getitemname(.temp_boots_id[.@item_item]) + .colors$[0] + ". SAD";
+			close;
+		}
+		else if ( .@rand <= 500 ) {
+			mes "Success, You are such a lucky guy.";
+			delitem .item_id[1],50;
+			delitem .temp_boots_id[.@item_item],1;
+			getitem  .slot_boots_id[.@item_item],1;
+		}
+		else{
+			mes "Oooops, Im so sorry, we failed";
+			delitem .item_id[1],50;
+			delitem .temp_boots_id[.@item_item],1;
+			getitem .tempid,1;
+			break;
+		}
+	case 3://coagulated spell
+		.@rand = rand(1,1000);
+		mes "So you choose to use " + getitemname(.item_id[2]) + " the chance to success is 30%";
+		next;
+		mes .colors$[1] + "Checking is required: " + .colors$[0] + " Please be patient.";
+		next;
+		if (!checkweight(.temp_boots_id[.@item_item],1)) {
+			mes .colors$[1]+"Ooops, Sorry you are overweight. Dont waste your slotted boots dude!" +.colors$[0];
+			close;
+		}
+		else if (countitem(6608) < 50 ) {
+			mes "Please get more " + .colors$[1] + getitemname(.item_id[2]) + .colors$[0] + " to proceed";
+			close;
+		}
+		else if (countitem(.temp_boots_id[.@item_item]) <= 0) {
+			mes "Sorry, you dont have a " + .colors$[1] + getitemname(.temp_boots_id[.@item_item]) + .colors$[0] + ". SAD";
+			close;
+		}
+		else if ( .@rand <= 300 ) { //Chance 30%
+			mes "Success, You are such a lucky guy.";
+			delitem .item_id[2],50;
+			delitem .temp_boots_id[.@item_item],1;
+			getitem  .slot_boots_id[.@item_item],1;
+		}
+		else{
+			mes "Oooops, Im so sorry, we failed";
+			delitem .item_id[2],50;
+			delitem .temp_boots_id[.@item_item],1;
+			getitem .tempid,1;
+			break;
+		}
+}
+	//Outro
+	next;
+	mes "[" +  .color$[1] + .npc_name$ + .color$[0] + "]";
+	mes "Thank you for your patience. Enjoy";
+	close;
+	
+	//Data Containers
+	OnInit:
+	//Npc Name.
+	set .npc_name$, "Ezekia";
+	//Color
+	setarray .colors$, "^000000", "^990000", "^997700", "^99FFFF";
+	//Temporal Boots ID
+	set .tempid, 2499;
+	//Item to use
+	setarray .item_id, 6607,6755,6608;
+	//Upgraded temporals
+	setarray .temp_boots_id[0], 22000,22001,22002,22003,22004,22005;
+	//Slotted temporals
+	setarray .slot_boots_id[0], 22006, 22009, 22010, 22007, 22008, 22011;
+}

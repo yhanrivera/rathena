@@ -1,0 +1,65 @@
+glast_01,210,273,5	script	Slave's Husband	483,{
+
+//Choosing the action you want to execute.
+	mes "[" +  .color$[1] + .name_id$ + .color$[0] + "]";
+	mes "Another one ??? OH MY GOD. That lady is very talkative";
+	mes "Okay I cannot hide anything now, so what do you want to do ?";
+	set .move_choice, select("~ Upgrade Temporal Boots");
+	next;
+	
+//Displaying the items you want to create or produce
+	mes "Here are the items I can process:";
+for (set .@a, 0; .@a < getarraysize(.temp_boots_id); set .@a, .@a + 1) {
+	mes .color$[3] + getitemname(.temp_boots_id[.@a]) + .color$[0] ;
+	set .@item_menu$, .@item_menu$ + (.@item_menu$ == "" ? "" : ":") + .color$[4] + getitemname(.temp_boots_id[.@a]) + .color$[0] ;
+	
+}
+	next;
+	//Menu of the items you want to create or produce
+	mes "So tell me what item do you want to produce ?";
+	next;
+	//Menu executing.
+	set.@item_choice, select(.@item_menu$) - 1;
+	next;
+	mes "[" +  .color$[1] + .name_id$ + .color$[0] + "]";
+
+//Executing your choice of action.
+switch(.move_choice) {
+	case 1:  //Temporal Boots >  Upgraded temporal boots
+		mes  "So lets proceed ?";
+		next;
+		if (!checkweight(.temp_boots_id[.@item_choice],1)) { // Will it Make Char Overweight?
+			mes .color$[1] + "I'm Sorry, but you can't carry this due to weight restrictions";
+			close;
+		}	
+		else if (countitem2(2499,1,7,0,0,0,0,0) <= 0 ) { //Does the player have +7 temporal boots
+			mes .color$[1] + "I'm Sorry, you dont have a +7 Temporal Boots!";
+			close;
+		}
+		else { //Checks now finished, lets go.
+			mes "There is no turning back, you will get " +.color$[1] + getitemname(.temp_boots_id[.@item_choice]) +.color$[0] + " after clicking next" ;
+			next;
+			delitem2 2499,1,1,7,0,0,0,0,0;
+			getitem .temp_boots_id[.@item_choice],1;
+			break;
+		}
+		
+}
+//Closing Remarks
+mes "[" +  .color$[1] + .name_id$ + .color$[0] + "]";
+mes "Come back again my friend !";
+close;
+
+
+//all codes below this contains data for the main code to be executed.
+	OnInit:
+	//NPC Name
+	//Your choice change it to anything
+	set .name_id$, "Lover Boy";
+	//Color Choices
+	setarray .color$[0], "^000000","^770000","^66FF00","^770099";
+	//ITEM IDS
+	setarray .temp_boots_id[0], 22000,22001,22002,22003,22004,22005;
+	//Temporal boots ID
+	set .tempboots_id, 2499;
+}
