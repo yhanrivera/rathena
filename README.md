@@ -1,0 +1,2 @@
+# rathena
+rathena npc scripts
