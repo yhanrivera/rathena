@@ -1,0 +1,37 @@
+caspen,160,213,5	script	Pass Giver	123,{
+	
+query_sql "SELECT DISTINCT `bm_pass` FROM `bm_password` WHERE `char_id` = '"+getcharid(0)+"'",.@pass1;
+if(.@pass1 > 0){
+	mes "You already have your password!";
+	close;
+	end;
+}
+else{	
+	mes "Do you want to get your BM pass ?";
+	next;
+	switch(select("Yes:No")){
+		case 1:
+			mes "Let me dive into the system, so I can get you a random password";
+			next;
+			.@password = getcharid(0)+rand(50000);
+			sleep2 5000;
+			mes "Done ! I successfuly created your unique password !";
+			query_sql "INSERT INTO `bm_password` ( `char_id` , `bm_pass` ) VALUES ( '"+getcharid(0)+"', '"+.@password+"' )";
+			query_sql "SELECT DISTINCT `bm_pass` FROM `bm_password` WHERE `char_id` = '"+getcharid(0)+"'",.@pass;
+			next;
+			mes "Your password is ^FF0000 "+.@pass+" ^000000 ";
+			mes "Please remember it, i can't repeat it to you.";
+			next;
+			mes "Goodluck";
+			close;
+			end;
+		case 2:
+			mes "OKAY!";
+			close;
+			end;
+
+	}
+
+}	
+	
+}

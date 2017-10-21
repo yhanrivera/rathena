@@ -1,0 +1,299 @@
+//=============================Path_Registration_Project===================================//
+//=============================Compatible With:============================================//
+//=============================rAthena Project=============================================//
+//=============================yhanrivera==================================================//
+//=========================================================================================//
+//=============================1 = Human===================================================//
+//=============================2 = Goblin==================================================//
+//=============================3 = Undead==================================================//
+//=============================4 = Orc=====================================================//
+//=============================5 = Elf=====================================================//
+//=========================================================================================//
+
+
+casp_chc,101,120,6	script	Arch Bishop	936,{
+	
+	cutin "pop_nor",2;
+	query_sql "SELECT DISTINCT `race`,	`quest_chapter` FROM `char_path` WHERE `char_id` = '"+getcharid(0)+"'",.@crace,.@cqchap;
+	if(.@crace	>	0 ){
+		mes "Sorry, you already have a race! Don't fool me !";
+		close2;
+		cutin "",255;
+		end;
+	}
+	else if(.@cqchap <	1 ){
+		mes	"Sorry, you still haven't finished Chapter 2 !";
+		next;
+		mes	"Read forums or use @request for more info";
+		close2;
+		cutin "",255;
+		end;
+	}
+	else
+		mes "[Race Master]";
+		mes "Oh Hello, "+strcharinfo(0)+"!";
+		mes "I heard that you already killed that demon";
+		mes "I am so glad that you've come this far!";
+		mes "But remember it would still be a long way to reach the end of this Apocalypse";
+		next;
+		mes "[Race Master]";
+		mes "It will be hard, but I know in time you can do it!";
+		mes "Don't worry, you will get every help you need as you go on!";
+		next;
+		mes "[Race Master]";
+		mes "So promise me that you won't quit and I will give you a chance to choose a race!";
+		mes "It will help you alot in your long journey!";
+		mes "But please, choose wisely! Because once a race is chosen, it can never be changed";
+		next;
+		//Label for convenience
+		RaceChoice:
+		mes "[Race Master]";
+		mes "Please choose your race to know more about it!";
+		next;
+		switch(select("Human:Goblin:Undead:Orc:Elf")){
+			//Human Choice
+			case 1:
+				mes	"[Race Master]";
+				mes	"Human eh ?";
+				mes "Input Information for human here";
+				next;
+				mes	"[Race Master]";
+				mes "So do you want to be a human ?";
+				next;
+				switch(select("Yes:No")){
+					case 1:
+						mes	"[Race Master]";
+						mes "Are you sure ? This is permanent!";
+						next;
+						switch(select("Of Course!:Let me think about it!")){
+							case 1:
+								mes	"[Race Master]";
+								mes "Congrats!! You are now a Human!";
+								mes "Goodluck";
+								query_sql "UPDATE `char_path` SET `race` = '1' WHERE `char_id` = '"+getcharid(0)+"'";
+								//broadcast script here
+								close2;
+								cutin "",255;
+								end;
+								
+							case 2:
+								next;
+								goto RaceChoice;
+						}		
+					case 2:
+						next;
+						goto RaceChoice;
+				}
+			//Goblin Choice	
+			case 2:
+				mes	"[Race Master]";
+				mes	"Goblin eh ?";
+				mes "Input Information for goblin here";
+				next;
+				mes	"[Race Master]";
+				mes "So do you want to be a goblin ?";
+				next;
+				switch(select("Yes:No")){
+					case 1:
+						mes	"[Race Master]";
+						mes "Are you sure ? This is permanent!";
+						next;
+						switch(select("Of Course!:Let me think about it!")){
+							case 1:
+								mes	"[Race Master]";
+								mes "Congrats!! You are now a Goblin!";
+								mes "Goodluck";
+								query_sql "UPDATE `char_path` SET `race` = '2' WHERE `char_id` = '"+getcharid(0)+"'";
+								//broadcast script here
+								close2;
+								cutin "",255;
+								end;
+								
+							case 2:
+								next;
+								goto RaceChoice;
+						}		
+					case 2:
+						next;
+						goto RaceChoice;			
+				}
+			//Undead Choice		
+			case 3:
+				mes	"[Race Master]";
+				mes	"Undead eh ?";
+				mes "Input Information for Undead here";
+				next;
+				mes	"[Race Master]";
+				mes "So do you want to be an Undead ?";
+				next;
+				switch(select("Yes:No")){
+					case 1:
+						mes	"[Race Master]";
+						mes "Are you sure ? This is permanent!";
+						next;
+						switch(select("Of Course!:Let me think about it!")){
+							case 1:
+								mes	"[Race Master]";
+								mes "Congrats!! You are now an Undead!";
+								mes "Goodluck";
+								query_sql "UPDATE `char_path` SET `race` = '3' WHERE `char_id` = '"+getcharid(0)+"'";
+								//broadcast script here
+								close2;
+								cutin "",255;
+								end;
+								
+							case 2:
+								next;
+								goto RaceChoice;
+						}		
+					case 2:
+						next;
+						goto RaceChoice;			
+				}
+			//Orc Choice	
+			case 4:
+				mes	"[Race Master]";
+				mes	"Orc eh ?";
+				mes "Input Information for Orc here";
+				next;
+				mes	"[Race Master]";
+				mes "So do you want to be an Orc ?";
+				next;
+				switch(select("Yes:No")){
+					case 1:
+						mes	"[Race Master]";
+						mes "Are you sure ? This is permanent!";
+						next;
+						switch(select("Of Course!:Let me think about it!")){
+							case 1:
+								mes	"[Race Master]";
+								mes "Congrats!! You are now an Orc!";
+								mes "Goodluck";
+								query_sql "UPDATE `char_path` SET `race` = '4' WHERE `char_id` = '"+getcharid(0)+"'";
+								//broadcast script here
+								close2;
+								cutin "",255;
+								end;
+								
+							case 2:
+								next;
+								goto RaceChoice;
+						}		
+					case 2:
+						next;
+						goto RaceChoice;			
+				}
+			//Elf Choice			
+			case 5:
+				mes	"[Race Master]";
+				mes	"Elf eh ?";
+				mes "Input Information for Elf here";
+				next;
+				mes	"[Race Master]";
+				mes "So do you want to be an Elf ?";
+				next;
+				switch(select("Yes:No")){
+					case 1:
+						mes	"[Race Master]";
+						mes "Are you sure ? This is permanent!";
+						next;
+						switch(select("Of Course!:Let me think about it!")){
+							case 1:
+								mes	"[Race Master]";
+								mes "Congrats!! You are now an Elf!";
+								mes "Goodluck";
+								query_sql "UPDATE `char_path` SET `race` = '5' WHERE `char_id` = '"+getcharid(0)+"'";
+								//broadcast script here
+								close2;
+								cutin "",255;
+								end;
+								
+							case 2:
+								next;
+								goto RaceChoice;
+						}		
+					case 2:
+						next;
+						goto RaceChoice;			
+				}				
+		}
+		
+}
+
+//Point System
+-	script	PointSystemH	-1,{
+
+OnNPCKillEvent:
+	query_sql "SELECT DISTINCT `race` FROM `char_path` WHERE `char_id` = '"+getcharid(0)+"'",.@crace;
+	switch(.@crace){
+		case 1:
+		if(killedrid == 1068){	
+			.@item = countitem(962);
+				if(.@item >= 1){
+					query_sql "UPDATE `char_path` SET `points` = `points` + 2 WHERE `char_id` = '"+getcharid(0)+"'";
+					query_sql "SELECT DISTINCT `points` FROM `char_path` WHERE `char_id` = '"+getcharid(0)+"'",.@cpoints;
+					dispbottom	"[Arch Bishop]: You have earned 2 Human Points, your total points now is "+.@cpoints+"",0x00FFDE;
+						/*if(.@cpoints >= 20){
+							cutin "pop_nor",2;
+							mes "[Arch Bishop]";
+							mes "Congratulations , The God of Gods has blessed you.";
+							next;
+							getitem(962,1);
+							mes "[Arch Bishop]";
+							mes "Go back to me and show me your proof!";
+							close2;
+							cutin "",255;
+							end;
+						}*/
+				}
+				else {
+					query_sql "UPDATE `char_path` SET `points` = `points` + 1 WHERE `char_id` = '"+getcharid(0)+"'";
+					query_sql "SELECT DISTINCT `points` FROM `char_path` WHERE `char_id` = '"+getcharid(0)+"'",.@cpoints;
+					dispbottom	"[Arch Bishop]: You have earned 1 Human Points, your total points now is "+.@cpoints+"",0x00FFDE;
+				}
+		}
+	}
+
+	
+	
+	
+	
+	
+}
+		
+		
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

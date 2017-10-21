@@ -1,0 +1,30 @@
+//Church Guard
+
+casp_chc,100,66,6	script	Church Guard	414,5,5,{
+	
+	query_sql "SELECT DISTINCT `quest_chapter` FROM `char_path` WHERE `char_id` = '"+getcharid(0)+"'",.@cqchap;
+	if(.@cqchap >= 1){
+		mes "[Head of Guards]";
+		mes "Oh, you killed that demon!";
+		mes "Guards ! Let this hero pass!";
+		close;
+		end;
+	}
+	else{
+		mes "[Head of Guards]";
+		mes "Who are you ? You are not allowed to go in here!";
+		mes "The Arch Bishop's life is at stake!";
+		mes "We cannot let anyone hurt her! Go Away!";
+		close2;
+		warp "caspen",100,205;
+		end;
+	}
+
+
+}
+
+casp_chc,103,66,3	duplicate(Church Guard)	Church Guard#casp_chc	414,5,5
+casp_chc,96,110,6	duplicate(Church Guard)	Church Guard#casp_chc1	414
+casp_chc,107,110,3	duplicate(Church Guard)	Church Guard#casp_chc2	414
+casp_chc,99,117,6	duplicate(Church Guard)	Church Guard#casp_chc3	416
+casp_chc,104,117,3	duplicate(Church Guard)	Church Guard#casp_chc4	602

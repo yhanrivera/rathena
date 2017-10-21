@@ -1,0 +1,66 @@
+
+casp_auct02,29,18,7	script	Leroy	872,{
+
+	mes "Hello ! Good day, hah !";
+	mes "Our hideout is just for worthy players.";
+	mes "Let me check your inventory for the items you can trade on me.";
+	next;
+	.@human = countitem(33001);
+	.@goblin = countitem(33002);
+	.@undead = countitem(33003);
+	.@orc = countitem(33004);
+	.@elf = countitem (33005);
+	sleep2 5000;
+	mes "Done ! Here are the list!";
+	next;
+	mes "[^0000FF Black Market Tradable List ^000000]";
+	mes "1."+getitemname(33001)+" - ^FF0000 "+.@human+" ^000000 pc/s ";
+	mes "2."+getitemname(33002)+" - ^FF0000 "+.@goblin+" ^000000 pc/s ";
+	mes "3."+getitemname(33003)+" - ^FF0000 "+.@undead+" ^000000 pc/s ";
+	mes "4."+getitemname(33004)+" - ^FF0000 "+.@orc+" ^000000 pc/s ";
+	mes "5."+getitemname(33005)+" - ^FF0000 "+.@elf+" ^000000 pc/s ";
+	next;
+	mes "You should have known that you need ^FF0000 "+getitemname(33006)+" ^000000 every transaction !";
+	mes "So what do you want to trade ?";
+	next;
+	switch(select(""+getitemname(33001)+":"+getitemname(33002)+":"+getitemname(33003)+":"+getitemname(33004)+":"+getitemname(33005)+"")){
+		case 1:
+			mes "[^0000FF Leroy ^000000]";
+			mes "You need this :";
+			mes ""+getitemname(33001)+" - ^00FF00 "+.@human+" / 30000 ^000000";
+			mes ""+getitemname(33006)+" - ^00FF00 "+countitem(33006)+" / 1  ^000000";
+			mes "Click next to proceed!";
+			next;
+				if(.@human < 30000 ){
+					mes "Ooops, you need more "+getitemname(33001)+"";
+				}
+				else if(countitem(33006) <= 0){
+					mes "Ooops, you need more "+getitemname(33006)+"";
+				}
+				else{
+					mes "Enjoy your encased goodies !";
+					next;
+					mes "Goodbye!";
+					delitem 33001,30000;
+					delitem 33006,1;
+					getitem 33007,1;
+					close;
+					end;
+				}
+				
+		case 2:
+			close;
+			end;
+		case 3:
+			close;
+			end;
+		case 4:
+			close;
+			end;
+		case 5:
+			close;
+			end;
+	}
+	
+	
+}
